@@ -32,7 +32,7 @@ private:
     QByteArray get(QUrl url);
 
 private:
-    QString unitSystem, language;
+    QString _unitSystem, _language;
 
     void city2geo(QString city);
     QString geo2city(double lat, double lon);

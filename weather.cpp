@@ -1,15 +1,22 @@
 #include "weather.h"
 
 Weather::Weather(){}
-Weather::Weather(QString unit): unitSystem(unit){}
-Weather::Weather(QString unit, QString lang): unitSystem(unit), language(lang){}
+Weather::Weather(QString unit): _unitSystem(unit){}
+Weather::Weather(QString unit, QString lang): _unitSystem(unit), _language(lang){}
 
 //https://openweathermap.org/current#data
-void Weather::changeLanguage(QString lang){ language = lang; }
-void Weather::changeUnit(QString unit){ unitSystem = unit; }
+void Weather::changeLanguage(QString lang){ _language = lang; }
+void Weather::changeUnit(QString unit){ _unitSystem = unit; }
 
 int Weather::getFromCity(QString city){
-    city2geo(city);
+    //city2geo(city);
+    QUrl url = QString("https://" + _api + "/data/2.5/weather"
+                       + "?q=" + city
+                       + "&units=" + _unitSystem
+                       + "&lang=" + _language
+                       + "&appid=" + _token);
+    qDebug() << "[URL] " << url;
+    return sendAndDecode(url);
     return 0;
 }
 
@@ -18,8 +25,8 @@ int Weather::getFromGeo(double lat, double lon){
     QUrl url = QString("https://" + _api + "/data/2.5/weather"
                        + "?lat=" + QString::number(lat)
                        + "&lon=" + QString::number(lon)
-                       + "&units=" + unitSystem
-                       + "&lang=" + language
+                       + "&units=" + _unitSystem
+                       + "&lang=" + _language
                        + "&appid=" + _token);
     qDebug() << "[URL] " << url;
     return sendAndDecode(url);
@@ -31,7 +38,7 @@ int Weather::sendAndDecode(QUrl url){
     if(jroot.isEmpty())
         return 0;
 
-    qDebug() << "[]" << jroot;
+    //qDebug() << "[JSON]" << jroot;
 
     int cod = jroot["cod"].toInt();
     switch(cod){
@@ -76,8 +83,8 @@ int Weather::sendAndDecode(QUrl url){
         data.snow.threeHours = jrain["3h"].toDouble();
 
     QJsonObject jsys = jroot["sys"].toObject();
-        data.sys.type = jsys[""].toInt();
-        data.sys.id = jsys[""].toInt();
+        data.sys.type = jsys["type"].toInt();
+        data.sys.id = jsys["id"].toInt();
         data.sys.message = jsys["message"].toString();
         data.sys.country = jsys["country"].toString();
         data.sys.sunrise = jsys["sunrise"].toInt();
