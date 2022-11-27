@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>WeatherApp</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/resources/img/02d.png</normaloff>:/resources/img/02d.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(127, 127, 127);
