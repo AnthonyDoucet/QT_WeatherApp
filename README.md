@@ -8,6 +8,10 @@ Download the build in github releases
 ![v0.1](./img/screenshot.png)
 <br><br>
 
+# Doxygen :
+### Online doc : https://anthonydoucet.github.io/QT_OpenWeather/Doc/index.html
+<br><br>
+
 # Build it yourself
 Add a **token.h** file to the root
 >#ifndef TOKEN_H<br>
