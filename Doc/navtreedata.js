@@ -27,14 +27,17 @@ var NAVTREE =
   [ "WeatherApp", "index.html", [
     [ "QT_OpenWeather", "md__r_e_a_d_m_e.html", [
       [ "v0.1", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
-      [ "Build it yourself", "md__r_e_a_d_m_e.html#autotoc_md2", null ]
+      [ "Doxygen :", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
+      [ "Build it yourself", "md__r_e_a_d_m_e.html#autotoc_md4", null ]
     ] ],
+    [ "Todo List", "todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ]
       ] ]
     ] ],

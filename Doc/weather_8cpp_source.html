@@ -93,162 +93,175 @@ $(document).ready(function(){initNavTree('weather_8cpp_source.html',''); initRes
   <div class="headertitle"><div class="title">weather.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;weather.h&quot;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span>Weather::Weather(){}</div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>Weather::Weather(QString unit): _unitSystem(unit){}</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>Weather::Weather(QString unit, QString lang): _unitSystem(unit), _language(lang){}</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//https://openweathermap.org/current#data</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">void</span> Weather::changeLanguage(QString lang){ _language = lang; }</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keywordtype">void</span> Weather::changeUnit(QString unit){ _unitSystem = unit; }</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>QString Weather::getTempUnit(){</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordflow">if</span>(_unitSystem == <span class="stringliteral">&quot;metric&quot;</span>){</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;°C&quot;</span>;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    }</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(_unitSystem == <span class="stringliteral">&quot;imperial&quot;</span>){</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;°F&quot;</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    }</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;K&quot;</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">int</span> Weather::getFromCity(QString city){</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">//city2geo(city);</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    QUrl url = QString(<span class="stringliteral">&quot;https://&quot;</span> + <a class="code hl_variable" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">_api</a> + <span class="stringliteral">&quot;/data/2.5/weather&quot;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                       + <span class="stringliteral">&quot;?q=&quot;</span> + city</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                       + <span class="stringliteral">&quot;&amp;units=&quot;</span> + _unitSystem</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                       + <span class="stringliteral">&quot;&amp;lang=&quot;</span> + _language</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                       + <span class="stringliteral">&quot;&amp;appid=&quot;</span> + <a class="code hl_variable" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">_token</a>);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;[URL] &quot;</span> &lt;&lt; url;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">return</span> sendAndDecode(url);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">//https://api.openweathermap.org/data/2.5/weather?lat={lat}&amp;lon={lon}&amp;appid={API key}</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">int</span> Weather::getFromGeo(<span class="keywordtype">double</span> lat, <span class="keywordtype">double</span> lon){</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    QUrl url = QString(<span class="stringliteral">&quot;https://&quot;</span> + <a class="code hl_variable" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">_api</a> + <span class="stringliteral">&quot;/data/2.5/weather&quot;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                       + <span class="stringliteral">&quot;?lat=&quot;</span> + QString::number(lat)</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                       + <span class="stringliteral">&quot;&amp;lon=&quot;</span> + QString::number(lon)</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                       + <span class="stringliteral">&quot;&amp;units=&quot;</span> + _unitSystem</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                       + <span class="stringliteral">&quot;&amp;lang=&quot;</span> + _language</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                       + <span class="stringliteral">&quot;&amp;appid=&quot;</span> + <a class="code hl_variable" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">_token</a>);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;[URL] &quot;</span> &lt;&lt; url;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> sendAndDecode(url);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keywordtype">int</span> Weather::sendAndDecode(QUrl url){</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    QJsonObject jroot = QJsonDocument::fromJson(get(url)).object();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span>(jroot.isEmpty())</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">return</span> 0;</div>
+<a href="weather_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="weather_8h.html">weather.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_weather.html#aa404c94fec05b825454a7309827767c6">    9</a></span><a class="code hl_function" href="class_weather.html#aa404c94fec05b825454a7309827767c6">Weather::Weather</a>(){}</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_weather.html#acc7f1e913dacc93ab2375ec65e48025f">   10</a></span><a class="code hl_function" href="class_weather.html#aa404c94fec05b825454a7309827767c6">Weather::Weather</a>(QString unit): _unitSystem(unit){}</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_weather.html#a5092f4326a65b26b9fc2721ae5374e14">   11</a></span><a class="code hl_function" href="class_weather.html#aa404c94fec05b825454a7309827767c6">Weather::Weather</a>(QString unit, QString lang): _unitSystem(unit), _language(lang){}</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">//https://openweathermap.org/current#data</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_weather.html#a9bad0439de09343ca34db2b7af9a9ad8">   14</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_weather.html#a9bad0439de09343ca34db2b7af9a9ad8">Weather::changeLanguage</a>(QString lang){ _language = lang; }</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_weather.html#a817040026f1f31259b71bc888db3a873">   15</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_weather.html#a817040026f1f31259b71bc888db3a873">Weather::changeUnit</a>(QString unit){ _unitSystem = unit; }</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_weather.html#a43c18ae5d4cab9ebf37fb4a07d361845">   16</a></span>QString <a class="code hl_function" href="class_weather.html#a43c18ae5d4cab9ebf37fb4a07d361845">Weather::getTempUnit</a>(){</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span>(_unitSystem == <span class="stringliteral">&quot;metric&quot;</span>){</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;°C&quot;</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    }</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(_unitSystem == <span class="stringliteral">&quot;imperial&quot;</span>){</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;°F&quot;</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;K&quot;</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_weather.html#aabe27b93130d4c37f202afd09ab3d804">   28</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_weather.html#aabe27b93130d4c37f202afd09ab3d804">Weather::getFromCity</a>(QString city){</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">//city2geo(city);</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    QUrl url = QString(<span class="stringliteral">&quot;https://&quot;</span> + <a class="code hl_variable" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">_api</a> + <span class="stringliteral">&quot;/data/2.5/weather&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                       + <span class="stringliteral">&quot;?q=&quot;</span> + city</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                       + <span class="stringliteral">&quot;&amp;units=&quot;</span> + _unitSystem</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                       + <span class="stringliteral">&quot;&amp;lang=&quot;</span> + _language</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                       + <span class="stringliteral">&quot;&amp;appid=&quot;</span> + <a class="code hl_variable" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">_token</a>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;[URL] &quot;</span> &lt;&lt; url;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="class_weather.html#a298e1391e0c7a0f596f8d0aa2ef3d7da">sendAndDecode</a>(url);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//https://api.openweathermap.org/data/2.5/weather?lat={lat}&amp;lon={lon}&amp;appid={API key}</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="class_weather.html#a9ad8e23e604fa6f5cecb3bff9debf200">   41</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_weather.html#a9ad8e23e604fa6f5cecb3bff9debf200">Weather::getFromGeo</a>(<span class="keywordtype">double</span> lat, <span class="keywordtype">double</span> lon){</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    QUrl url = QString(<span class="stringliteral">&quot;https://&quot;</span> + <a class="code hl_variable" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">_api</a> + <span class="stringliteral">&quot;/data/2.5/weather&quot;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                       + <span class="stringliteral">&quot;?lat=&quot;</span> + QString::number(lat)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                       + <span class="stringliteral">&quot;&amp;lon=&quot;</span> + QString::number(lon)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                       + <span class="stringliteral">&quot;&amp;units=&quot;</span> + _unitSystem</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                       + <span class="stringliteral">&quot;&amp;lang=&quot;</span> + _language</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                       + <span class="stringliteral">&quot;&amp;appid=&quot;</span> + <a class="code hl_variable" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">_token</a>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;[URL] &quot;</span> &lt;&lt; url;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="class_weather.html#a298e1391e0c7a0f596f8d0aa2ef3d7da">sendAndDecode</a>(url);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">//qDebug() &lt;&lt; &quot;[JSON]&quot; &lt;&lt; jroot;</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">int</span> cod = jroot[<span class="stringliteral">&quot;cod&quot;</span>].toInt();</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">switch</span>(cod){</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">case</span> 200: <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">case</span> 400: <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">default</span>: <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    QJsonObject jcoord = jroot[<span class="stringliteral">&quot;coord&quot;</span>].toObject();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        data.coord.lat = jcoord[<span class="stringliteral">&quot;lat&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        data.coord.lon = jcoord[<span class="stringliteral">&quot;lon&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    QJsonObject jweather = jroot[<span class="stringliteral">&quot;weather&quot;</span>].toArray().at(0).toObject();</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        data.weather.id = jweather[<span class="stringliteral">&quot;id&quot;</span>].toInt();</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        data.weather.description = jweather[<span class="stringliteral">&quot;description&quot;</span>].toString();</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        data.weather.icon = jweather[<span class="stringliteral">&quot;icon&quot;</span>].toString();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    QJsonObject jmain = jroot[<span class="stringliteral">&quot;main&quot;</span>].toObject();</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        data.temp = jmain[<span class="stringliteral">&quot;temp&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        data.feels_like = jmain[<span class="stringliteral">&quot;feels_like&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        data.temp_min = jmain[<span class="stringliteral">&quot;temp_min&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        data.temp_max = jmain[<span class="stringliteral">&quot;temp_max&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        data.pressure = jmain[<span class="stringliteral">&quot;pressure&quot;</span>].toInt();</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        data.humidity = jmain[<span class="stringliteral">&quot;humidity&quot;</span>].toInt();</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        data.sea_level = jmain[<span class="stringliteral">&quot;sea_level&quot;</span>].toInt();</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        data.grnd_level = jmain[<span class="stringliteral">&quot;grnd_level&quot;</span>].toInt();</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    QJsonObject jwind = jroot[<span class="stringliteral">&quot;wind&quot;</span>].toObject();</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        data.wind.speed = jwind[<span class="stringliteral">&quot;speed&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        data.wind.deg = jwind[<span class="stringliteral">&quot;deg&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        data.wind.gust = jwind[<span class="stringliteral">&quot;gust&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    QJsonObject jclouds = jroot[<span class="stringliteral">&quot;clouds&quot;</span>].toObject();</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        data.clouds.all = jclouds[<span class="stringliteral">&quot;all&quot;</span>].toInt();</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    QJsonObject jrain = jroot[<span class="stringliteral">&quot;rain&quot;</span>].toObject();</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        data.rain.oneHour = jrain[<span class="stringliteral">&quot;1h&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        data.rain.threeHours = jrain[<span class="stringliteral">&quot;3h&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    QJsonObject jsnow = jroot[<span class="stringliteral">&quot;snow&quot;</span>].toObject();</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        data.snow.oneHour = jrain[<span class="stringliteral">&quot;1h&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        data.snow.threeHours = jrain[<span class="stringliteral">&quot;3h&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    QJsonObject jsys = jroot[<span class="stringliteral">&quot;sys&quot;</span>].toObject();</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        data.sys.type = jsys[<span class="stringliteral">&quot;type&quot;</span>].toInt();</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        data.sys.id = jsys[<span class="stringliteral">&quot;id&quot;</span>].toInt();</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        data.sys.message = jsys[<span class="stringliteral">&quot;message&quot;</span>].toString();</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        data.sys.country = jsys[<span class="stringliteral">&quot;country&quot;</span>].toString();</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        data.sys.sunrise = jsys[<span class="stringliteral">&quot;sunrise&quot;</span>].toInt();</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        data.sys.sunset = jsys[<span class="stringliteral">&quot;sunset&quot;</span>].toInt();</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    data.base = jroot[<span class="stringliteral">&quot;base&quot;</span>].toString();</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    data.visibility = jroot[<span class="stringliteral">&quot;visibility&quot;</span>].toInt();</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    data.dt = jroot[<span class="stringliteral">&quot;dt&quot;</span>].toDouble();</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    data.timezone = jroot[<span class="stringliteral">&quot;timezone&quot;</span>].toInt();</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    data.id = jroot[<span class="stringliteral">&quot;id&quot;</span>].toInt();</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    data.name = jroot[<span class="stringliteral">&quot;name&quot;</span>].toString();</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>QByteArray Weather::get(QUrl url){</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="comment">//config url</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    QNetworkRequest request(url);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="comment">//https</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    QSslConfiguration config = QSslConfiguration::defaultConfiguration();</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    config.setProtocol(QSsl::TlsV1_2);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    request.setSslConfiguration(config);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="comment">//get</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    QNetworkReply *reply = <a class="code hl_variable" href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">_networkManager</a>.get(request);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">while</span> (!reply-&gt;isFinished()){</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        qApp-&gt;processEvents();</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="class_weather.html#a298e1391e0c7a0f596f8d0aa2ef3d7da">   52</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_weather.html#a298e1391e0c7a0f596f8d0aa2ef3d7da">Weather::sendAndDecode</a>(QUrl url){</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    QJsonObject jroot = QJsonDocument::fromJson(<a class="code hl_function" href="class_weather.html#a56a4de34171eeb917bece48ed67e5caa">get</a>(url)).object();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">if</span>(jroot.isEmpty())</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="comment">//qDebug() &lt;&lt; &quot;[JSON]&quot; &lt;&lt; jroot;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">int</span> cod = jroot[<span class="stringliteral">&quot;cod&quot;</span>].toInt();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">switch</span>(cod){</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">case</span> 200: <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">case</span> 400: <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">default</span>: <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    QJsonObject jcoord = jroot[<span class="stringliteral">&quot;coord&quot;</span>].toObject();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.coord.lat = jcoord[<span class="stringliteral">&quot;lat&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.coord.lon = jcoord[<span class="stringliteral">&quot;lon&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    QJsonObject jweather = jroot[<span class="stringliteral">&quot;weather&quot;</span>].toArray().at(0).toObject();</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.weather.id = jweather[<span class="stringliteral">&quot;id&quot;</span>].toInt();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.weather.description = jweather[<span class="stringliteral">&quot;description&quot;</span>].toString();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.weather.icon = jweather[<span class="stringliteral">&quot;icon&quot;</span>].toString();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    QJsonObject jmain = jroot[<span class="stringliteral">&quot;main&quot;</span>].toObject();</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.temp = jmain[<span class="stringliteral">&quot;temp&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.feels_like = jmain[<span class="stringliteral">&quot;feels_like&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.temp_min = jmain[<span class="stringliteral">&quot;temp_min&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.temp_max = jmain[<span class="stringliteral">&quot;temp_max&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.pressure = jmain[<span class="stringliteral">&quot;pressure&quot;</span>].toInt();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.humidity = jmain[<span class="stringliteral">&quot;humidity&quot;</span>].toInt();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.sea_level = jmain[<span class="stringliteral">&quot;sea_level&quot;</span>].toInt();</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.grnd_level = jmain[<span class="stringliteral">&quot;grnd_level&quot;</span>].toInt();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    QJsonObject jwind = jroot[<span class="stringliteral">&quot;wind&quot;</span>].toObject();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.wind.speed = jwind[<span class="stringliteral">&quot;speed&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.wind.deg = jwind[<span class="stringliteral">&quot;deg&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.wind.gust = jwind[<span class="stringliteral">&quot;gust&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    QJsonObject jclouds = jroot[<span class="stringliteral">&quot;clouds&quot;</span>].toObject();</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.clouds.all = jclouds[<span class="stringliteral">&quot;all&quot;</span>].toInt();</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    QJsonObject jrain = jroot[<span class="stringliteral">&quot;rain&quot;</span>].toObject();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.rain.oneHour = jrain[<span class="stringliteral">&quot;1h&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.rain.threeHours = jrain[<span class="stringliteral">&quot;3h&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    QJsonObject jsnow = jroot[<span class="stringliteral">&quot;snow&quot;</span>].toObject();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.snow.oneHour = jrain[<span class="stringliteral">&quot;1h&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.snow.threeHours = jrain[<span class="stringliteral">&quot;3h&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    QJsonObject jsys = jroot[<span class="stringliteral">&quot;sys&quot;</span>].toObject();</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.sys.type = jsys[<span class="stringliteral">&quot;type&quot;</span>].toInt();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.sys.id = jsys[<span class="stringliteral">&quot;id&quot;</span>].toInt();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.sys.message = jsys[<span class="stringliteral">&quot;message&quot;</span>].toString();</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.sys.country = jsys[<span class="stringliteral">&quot;country&quot;</span>].toString();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.sys.sunrise = jsys[<span class="stringliteral">&quot;sunrise&quot;</span>].toInt();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.sys.sunset = jsys[<span class="stringliteral">&quot;sunset&quot;</span>].toInt();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.base = jroot[<span class="stringliteral">&quot;base&quot;</span>].toString();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.visibility = jroot[<span class="stringliteral">&quot;visibility&quot;</span>].toInt();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.dt = jroot[<span class="stringliteral">&quot;dt&quot;</span>].toDouble();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.timezone = jroot[<span class="stringliteral">&quot;timezone&quot;</span>].toInt();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.id = jroot[<span class="stringliteral">&quot;id&quot;</span>].toInt();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>.name = jroot[<span class="stringliteral">&quot;name&quot;</span>].toString();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="class_weather.html#a56a4de34171eeb917bece48ed67e5caa">  121</a></span>QByteArray <a class="code hl_function" href="class_weather.html#a56a4de34171eeb917bece48ed67e5caa">Weather::get</a>(QUrl url){</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="comment">//config url</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    QNetworkRequest request(url);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="comment">//https</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    QSslConfiguration config = QSslConfiguration::defaultConfiguration();</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    config.setProtocol(QSsl::TlsV1_2);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    request.setSslConfiguration(config);</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">//response</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    QByteArray read = reply-&gt;readAll();</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    reply-&gt;close();</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    reply-&gt;deleteLater();</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">return</span> read;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>}</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">//http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&amp;limit={limit}&amp;appid={API key}</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="keywordtype">void</span> Weather::city2geo(QString city){</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    QUrl url = QString(<span class="stringliteral">&quot;https://&quot;</span> + <a class="code hl_variable" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">_api</a> + <span class="stringliteral">&quot;/geo/1.0/direct?q=&quot;</span> + city + <span class="stringliteral">&quot;&amp;appid=&quot;</span> + <a class="code hl_variable" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">_token</a>);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;[URL] &quot;</span> &lt;&lt; url;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    QJsonObject jroot = QJsonDocument::fromJson(get(url)).object();</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    qDebug() &lt;&lt; jroot;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>}</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>QString Weather::geo2city(<span class="keywordtype">double</span> lat, <span class="keywordtype">double</span> lon){</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}</div>
-<div class="ttc" id="aclass_weather_html_a064f8d73fcc888511f9e82fe76f3bdfe"><div class="ttname"><a href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">Weather::_api</a></div><div class="ttdeci">QString _api</div><div class="ttdoc">API URL.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00028">weather.h:28</a></div></div>
-<div class="ttc" id="aclass_weather_html_a9de56b13ece1bf5f7b1d822bc8a9e98e"><div class="ttname"><a href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">Weather::_networkManager</a></div><div class="ttdeci">QNetworkAccessManager _networkManager</div><div class="ttdoc">Network Manager.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00026">weather.h:26</a></div></div>
-<div class="ttc" id="aclass_weather_html_ab5b16e6bbd2f0c51c8018cd4b5c3166d"><div class="ttname"><a href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">Weather::_token</a></div><div class="ttdeci">QString _token</div><div class="ttdoc">API Token.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00030">weather.h:30</a></div></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">//get</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    QNetworkReply *reply = <a class="code hl_variable" href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">_networkManager</a>.get(request);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">while</span> (!reply-&gt;isFinished()){</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        qApp-&gt;processEvents();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    }</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="comment">//response</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    QByteArray read = reply-&gt;readAll();</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    reply-&gt;close();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    reply-&gt;deleteLater();</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">return</span> read;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>}</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">//http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&amp;limit={limit}&amp;appid={API key}</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="class_weather.html#ab79fb27e596a9a9c3af6cd08c9cba0f3">  144</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_weather.html#ab79fb27e596a9a9c3af6cd08c9cba0f3">Weather::city2geo</a>(QString city){</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    QUrl url = QString(<span class="stringliteral">&quot;https://&quot;</span> + <a class="code hl_variable" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">_api</a> + <span class="stringliteral">&quot;/geo/1.0/direct?q=&quot;</span> + city + <span class="stringliteral">&quot;&amp;appid=&quot;</span> + <a class="code hl_variable" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">_token</a>);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;[URL] &quot;</span> &lt;&lt; url;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    QJsonObject jroot = QJsonDocument::fromJson(<a class="code hl_function" href="class_weather.html#a56a4de34171eeb917bece48ed67e5caa">get</a>(url)).object();</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    qDebug() &lt;&lt; jroot;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>}</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="class_weather.html#aa3a825ea058a97d838c3f2cc201dc324">  151</a></span>QString <a class="code hl_function" href="class_weather.html#aa3a825ea058a97d838c3f2cc201dc324">Weather::geo2city</a>(<span class="keywordtype">double</span> lat, <span class="keywordtype">double</span> lon){</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>}</div>
+<div class="ttc" id="aclass_weather_html_a064f8d73fcc888511f9e82fe76f3bdfe"><div class="ttname"><a href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">Weather::_api</a></div><div class="ttdeci">QString _api</div><div class="ttdoc">API URL.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00090">weather.h:90</a></div></div>
+<div class="ttc" id="aclass_weather_html_a298e1391e0c7a0f596f8d0aa2ef3d7da"><div class="ttname"><a href="class_weather.html#a298e1391e0c7a0f596f8d0aa2ef3d7da">Weather::sendAndDecode</a></div><div class="ttdeci">int sendAndDecode(QUrl url)</div><div class="ttdoc">send a request from URL and decode JSON response</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00052">weather.cpp:52</a></div></div>
+<div class="ttc" id="aclass_weather_html_a43c18ae5d4cab9ebf37fb4a07d361845"><div class="ttname"><a href="class_weather.html#a43c18ae5d4cab9ebf37fb4a07d361845">Weather::getTempUnit</a></div><div class="ttdeci">QString getTempUnit()</div><div class="ttdoc">Return the current unit selected.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00016">weather.cpp:16</a></div></div>
+<div class="ttc" id="aclass_weather_html_a56a4de34171eeb917bece48ed67e5caa"><div class="ttname"><a href="class_weather.html#a56a4de34171eeb917bece48ed67e5caa">Weather::get</a></div><div class="ttdeci">QByteArray get(QUrl url)</div><div class="ttdoc">https GET from URL</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00121">weather.cpp:121</a></div></div>
+<div class="ttc" id="aclass_weather_html_a817040026f1f31259b71bc888db3a873"><div class="ttname"><a href="class_weather.html#a817040026f1f31259b71bc888db3a873">Weather::changeUnit</a></div><div class="ttdeci">void changeUnit(QString unit)</div><div class="ttdoc">Change the current unit system.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00015">weather.cpp:15</a></div></div>
+<div class="ttc" id="aclass_weather_html_a9ad8e23e604fa6f5cecb3bff9debf200"><div class="ttname"><a href="class_weather.html#a9ad8e23e604fa6f5cecb3bff9debf200">Weather::getFromGeo</a></div><div class="ttdeci">int getFromGeo(double lat, double lon)</div><div class="ttdoc">Get data from coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00041">weather.cpp:41</a></div></div>
+<div class="ttc" id="aclass_weather_html_a9bad0439de09343ca34db2b7af9a9ad8"><div class="ttname"><a href="class_weather.html#a9bad0439de09343ca34db2b7af9a9ad8">Weather::changeLanguage</a></div><div class="ttdeci">void changeLanguage(QString lang)</div><div class="ttdoc">Change language of the API response.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00014">weather.cpp:14</a></div></div>
+<div class="ttc" id="aclass_weather_html_a9de56b13ece1bf5f7b1d822bc8a9e98e"><div class="ttname"><a href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">Weather::_networkManager</a></div><div class="ttdeci">QNetworkAccessManager _networkManager</div><div class="ttdoc">Network Manager.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00088">weather.h:88</a></div></div>
+<div class="ttc" id="aclass_weather_html_aa3a825ea058a97d838c3f2cc201dc324"><div class="ttname"><a href="class_weather.html#aa3a825ea058a97d838c3f2cc201dc324">Weather::geo2city</a></div><div class="ttdeci">QString geo2city(double lat, double lon)</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00151">weather.cpp:151</a></div></div>
+<div class="ttc" id="aclass_weather_html_aa404c94fec05b825454a7309827767c6"><div class="ttname"><a href="class_weather.html#aa404c94fec05b825454a7309827767c6">Weather::Weather</a></div><div class="ttdeci">Weather()</div><div class="ttdoc">Default Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00009">weather.cpp:9</a></div></div>
+<div class="ttc" id="aclass_weather_html_aabe27b93130d4c37f202afd09ab3d804"><div class="ttname"><a href="class_weather.html#aabe27b93130d4c37f202afd09ab3d804">Weather::getFromCity</a></div><div class="ttdeci">int getFromCity(QString city)</div><div class="ttdoc">Get data from a City Name.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00028">weather.cpp:28</a></div></div>
+<div class="ttc" id="aclass_weather_html_ab5b16e6bbd2f0c51c8018cd4b5c3166d"><div class="ttname"><a href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">Weather::_token</a></div><div class="ttdeci">QString _token</div><div class="ttdoc">API Token.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00092">weather.h:92</a></div></div>
+<div class="ttc" id="aclass_weather_html_ab79fb27e596a9a9c3af6cd08c9cba0f3"><div class="ttname"><a href="class_weather.html#ab79fb27e596a9a9c3af6cd08c9cba0f3">Weather::city2geo</a></div><div class="ttdeci">void city2geo(QString city)</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00144">weather.cpp:144</a></div></div>
+<div class="ttc" id="aclass_weather_html_afc07ff4fa1ec0519fb62dd97961a3cd5"><div class="ttname"><a href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">Weather::data</a></div><div class="ttdeci">struct Weather::@0 data</div><div class="ttdoc">Struct to match the JSON format.</div></div>
+<div class="ttc" id="aweather_8h_html"><div class="ttname"><a href="weather_8h.html">weather.h</a></div><div class="ttdoc">Weather Header.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>weather.cpp</b></li>
+    <li class="navelem"><a class="el" href="weather_8cpp.html">weather.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>

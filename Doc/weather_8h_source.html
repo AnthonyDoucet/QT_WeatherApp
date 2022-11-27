@@ -93,122 +93,141 @@ $(document).ready(function(){initNavTree('weather_8h_source.html',''); initResiz
   <div class="headertitle"><div class="title">weather.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef WEATHER_H</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define WEATHER_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;QNetworkAccessManager&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;QNetworkRequest&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;QNetworkReply&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;QUrl&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;QtGui&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;token.h&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_weather.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="class_weather.html">Weather</a></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_class" href="class_weather.html">Weather</a>();</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="class_weather.html">Weather</a>(QString unit);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="class_weather.html">Weather</a>(QString unit, QString lang);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> changeLanguage(QString lang);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">void</span> changeUnit(QString unit);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    QString getTempUnit();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">int</span> getFromCity(QString city);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">int</span> getFromGeo(<span class="keywordtype">double</span> lat, <span class="keywordtype">double</span> lon);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">   26</a></span>    QNetworkAccessManager <a class="code hl_variable" href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">_networkManager</a>;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">   28</a></span>    QString <a class="code hl_variable" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">_api</a> = <span class="stringliteral">&quot;api.openweathermap.org&quot;</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">   30</a></span>    QString <a class="code hl_variable" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">_token</a> = API_TOKEN;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">int</span> sendAndDecode(QUrl url);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    QByteArray get(QUrl url);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    QString _unitSystem, _language;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">void</span> city2geo(QString city);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    QString geo2city(<span class="keywordtype">double</span> lat, <span class="keywordtype">double</span> lon);</div>
+<a href="weather_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef WEATHER_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define WEATHER_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;QNetworkAccessManager&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;QNetworkRequest&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;QNetworkReply&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;QUrl&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;QtGui&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;token.h&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_weather.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="class_weather.html">Weather</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="class_weather.html#aa404c94fec05b825454a7309827767c6">Weather</a>();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_function" href="class_weather.html#aa404c94fec05b825454a7309827767c6">Weather</a>(QString unit);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="class_weather.html#aa404c94fec05b825454a7309827767c6">Weather</a>(QString unit, QString lang);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_weather.html#a9bad0439de09343ca34db2b7af9a9ad8">changeLanguage</a>(QString lang);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">//DATA</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">struct</span>{</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">struct</span>{</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keywordtype">double</span> lat;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordtype">double</span> lon;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        }coord;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">struct</span>{</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keywordtype">int</span> id;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            QString main;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            QString description;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            QString icon;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        }weather;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_weather.html#a817040026f1f31259b71bc888db3a873">changeUnit</a>(QString unit);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    QString <a class="code hl_function" href="class_weather.html#a43c18ae5d4cab9ebf37fb4a07d361845">getTempUnit</a>();</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        QString base;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">double</span> temp;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">double</span> feels_like;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">double</span> temp_min;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordtype">double</span> temp_max;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordtype">int</span> pressure;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">int</span> humidity;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordtype">int</span> sea_level;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">int</span> grnd_level;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordtype">int</span> visibility;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keyword">struct</span>{</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordtype">double</span> speed;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordtype">int</span> deg;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keywordtype">double</span> gust;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        }wind;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keyword">struct</span>{</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordtype">int</span> all;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        }clouds;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_weather.html#aabe27b93130d4c37f202afd09ab3d804">getFromCity</a>(QString city);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_weather.html#a9ad8e23e604fa6f5cecb3bff9debf200">getFromGeo</a>(<span class="keywordtype">double</span> lat, <span class="keywordtype">double</span> lon);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_weather.html#ab79fb27e596a9a9c3af6cd08c9cba0f3">city2geo</a>(QString city);</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keyword">struct</span>{</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordtype">double</span> oneHour;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordtype">double</span> threeHours;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        }rain;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keyword">struct</span>{</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keywordtype">double</span> oneHour;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordtype">double</span> threeHours;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        }snow;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordtype">double</span> dt;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keyword">struct</span>{</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <span class="keywordtype">int</span> type;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordtype">int</span> id;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            QString message;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            QString country;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordtype">int</span> sunrise;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordtype">int</span> sunset;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        }sys;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordtype">int</span> timezone;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordtype">int</span> id;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        QString name;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }data;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>};</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    QString <a class="code hl_function" href="class_weather.html#aa3a825ea058a97d838c3f2cc201dc324">geo2city</a>(<span class="keywordtype">double</span> lat, <span class="keywordtype">double</span> lon);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">   88</a></span>    QNetworkAccessManager <a class="code hl_variable" href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">_networkManager</a>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">   90</a></span>    QString <a class="code hl_variable" href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">_api</a> = <span class="stringliteral">&quot;api.openweathermap.org&quot;</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">   92</a></span>    QString <a class="code hl_variable" href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">_token</a> = API_TOKEN;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_weather.html#a298e1391e0c7a0f596f8d0aa2ef3d7da">sendAndDecode</a>(QUrl url);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    QByteArray <a class="code hl_function" href="class_weather.html#a56a4de34171eeb917bece48ed67e5caa">get</a>(QUrl url);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    QString _unitSystem, _language;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="preprocessor">#endif </span><span class="comment">// WEATHER_H</span></div>
-<div class="ttc" id="aclass_weather_html"><div class="ttname"><a href="class_weather.html">Weather</a></div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00011">weather.h:12</a></div></div>
-<div class="ttc" id="aclass_weather_html_a064f8d73fcc888511f9e82fe76f3bdfe"><div class="ttname"><a href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">Weather::_api</a></div><div class="ttdeci">QString _api</div><div class="ttdoc">API URL.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00028">weather.h:28</a></div></div>
-<div class="ttc" id="aclass_weather_html_a9de56b13ece1bf5f7b1d822bc8a9e98e"><div class="ttname"><a href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">Weather::_networkManager</a></div><div class="ttdeci">QNetworkAccessManager _networkManager</div><div class="ttdoc">Network Manager.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00026">weather.h:26</a></div></div>
-<div class="ttc" id="aclass_weather_html_ab5b16e6bbd2f0c51c8018cd4b5c3166d"><div class="ttname"><a href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">Weather::_token</a></div><div class="ttdeci">QString _token</div><div class="ttdoc">API Token.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00030">weather.h:30</a></div></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <span class="keywordtype">double</span> lat;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            <span class="keywordtype">double</span> lon;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        }coord;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            <span class="keywordtype">int</span> id;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            QString main;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            QString description;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            QString icon;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        }weather;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        QString base;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordtype">double</span> temp;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordtype">double</span> feels_like;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordtype">double</span> temp_min;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordtype">double</span> temp_max;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordtype">int</span> pressure;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="keywordtype">int</span> humidity;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordtype">int</span> sea_level;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keywordtype">int</span> grnd_level;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keywordtype">int</span> visibility;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            <span class="keywordtype">double</span> speed;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordtype">int</span> deg;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            <span class="keywordtype">double</span> gust;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        }wind;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            <span class="keywordtype">int</span> all;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        }clouds;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="keywordtype">double</span> oneHour;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            <span class="keywordtype">double</span> threeHours;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        }rain;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="keywordtype">double</span> oneHour;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <span class="keywordtype">double</span> threeHours;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        }snow;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordtype">double</span> dt;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <span class="keywordtype">int</span> type;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="keywordtype">int</span> id;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            QString message;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            QString country;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            <span class="keywordtype">int</span> sunrise;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            <span class="keywordtype">int</span> sunset;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        }sys;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keywordtype">int</span> timezone;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordtype">int</span> id;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        QString name;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">  217</a></span>    }<a class="code hl_variable" href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">data</a>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>};</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="preprocessor">#endif </span><span class="comment">// WEATHER_H</span></div>
+<div class="ttc" id="aclass_weather_html"><div class="ttname"><a href="class_weather.html">Weather</a></div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00017">weather.h:18</a></div></div>
+<div class="ttc" id="aclass_weather_html_a064f8d73fcc888511f9e82fe76f3bdfe"><div class="ttname"><a href="class_weather.html#a064f8d73fcc888511f9e82fe76f3bdfe">Weather::_api</a></div><div class="ttdeci">QString _api</div><div class="ttdoc">API URL.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00090">weather.h:90</a></div></div>
+<div class="ttc" id="aclass_weather_html_a298e1391e0c7a0f596f8d0aa2ef3d7da"><div class="ttname"><a href="class_weather.html#a298e1391e0c7a0f596f8d0aa2ef3d7da">Weather::sendAndDecode</a></div><div class="ttdeci">int sendAndDecode(QUrl url)</div><div class="ttdoc">send a request from URL and decode JSON response</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00052">weather.cpp:52</a></div></div>
+<div class="ttc" id="aclass_weather_html_a43c18ae5d4cab9ebf37fb4a07d361845"><div class="ttname"><a href="class_weather.html#a43c18ae5d4cab9ebf37fb4a07d361845">Weather::getTempUnit</a></div><div class="ttdeci">QString getTempUnit()</div><div class="ttdoc">Return the current unit selected.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00016">weather.cpp:16</a></div></div>
+<div class="ttc" id="aclass_weather_html_a56a4de34171eeb917bece48ed67e5caa"><div class="ttname"><a href="class_weather.html#a56a4de34171eeb917bece48ed67e5caa">Weather::get</a></div><div class="ttdeci">QByteArray get(QUrl url)</div><div class="ttdoc">https GET from URL</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00121">weather.cpp:121</a></div></div>
+<div class="ttc" id="aclass_weather_html_a817040026f1f31259b71bc888db3a873"><div class="ttname"><a href="class_weather.html#a817040026f1f31259b71bc888db3a873">Weather::changeUnit</a></div><div class="ttdeci">void changeUnit(QString unit)</div><div class="ttdoc">Change the current unit system.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00015">weather.cpp:15</a></div></div>
+<div class="ttc" id="aclass_weather_html_a9ad8e23e604fa6f5cecb3bff9debf200"><div class="ttname"><a href="class_weather.html#a9ad8e23e604fa6f5cecb3bff9debf200">Weather::getFromGeo</a></div><div class="ttdeci">int getFromGeo(double lat, double lon)</div><div class="ttdoc">Get data from coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00041">weather.cpp:41</a></div></div>
+<div class="ttc" id="aclass_weather_html_a9bad0439de09343ca34db2b7af9a9ad8"><div class="ttname"><a href="class_weather.html#a9bad0439de09343ca34db2b7af9a9ad8">Weather::changeLanguage</a></div><div class="ttdeci">void changeLanguage(QString lang)</div><div class="ttdoc">Change language of the API response.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00014">weather.cpp:14</a></div></div>
+<div class="ttc" id="aclass_weather_html_a9de56b13ece1bf5f7b1d822bc8a9e98e"><div class="ttname"><a href="class_weather.html#a9de56b13ece1bf5f7b1d822bc8a9e98e">Weather::_networkManager</a></div><div class="ttdeci">QNetworkAccessManager _networkManager</div><div class="ttdoc">Network Manager.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00088">weather.h:88</a></div></div>
+<div class="ttc" id="aclass_weather_html_aa3a825ea058a97d838c3f2cc201dc324"><div class="ttname"><a href="class_weather.html#aa3a825ea058a97d838c3f2cc201dc324">Weather::geo2city</a></div><div class="ttdeci">QString geo2city(double lat, double lon)</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00151">weather.cpp:151</a></div></div>
+<div class="ttc" id="aclass_weather_html_aa404c94fec05b825454a7309827767c6"><div class="ttname"><a href="class_weather.html#aa404c94fec05b825454a7309827767c6">Weather::Weather</a></div><div class="ttdeci">Weather()</div><div class="ttdoc">Default Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00009">weather.cpp:9</a></div></div>
+<div class="ttc" id="aclass_weather_html_aabe27b93130d4c37f202afd09ab3d804"><div class="ttname"><a href="class_weather.html#aabe27b93130d4c37f202afd09ab3d804">Weather::getFromCity</a></div><div class="ttdeci">int getFromCity(QString city)</div><div class="ttdoc">Get data from a City Name.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00028">weather.cpp:28</a></div></div>
+<div class="ttc" id="aclass_weather_html_ab5b16e6bbd2f0c51c8018cd4b5c3166d"><div class="ttname"><a href="class_weather.html#ab5b16e6bbd2f0c51c8018cd4b5c3166d">Weather::_token</a></div><div class="ttdeci">QString _token</div><div class="ttdoc">API Token.</div><div class="ttdef"><b>Definition:</b> <a href="weather_8h_source.html#l00092">weather.h:92</a></div></div>
+<div class="ttc" id="aclass_weather_html_ab79fb27e596a9a9c3af6cd08c9cba0f3"><div class="ttname"><a href="class_weather.html#ab79fb27e596a9a9c3af6cd08c9cba0f3">Weather::city2geo</a></div><div class="ttdeci">void city2geo(QString city)</div><div class="ttdef"><b>Definition:</b> <a href="weather_8cpp_source.html#l00144">weather.cpp:144</a></div></div>
+<div class="ttc" id="aclass_weather_html_afc07ff4fa1ec0519fb62dd97961a3cd5"><div class="ttname"><a href="class_weather.html#afc07ff4fa1ec0519fb62dd97961a3cd5">Weather::data</a></div><div class="ttdeci">struct Weather::@0 data</div><div class="ttdoc">Struct to match the JSON format.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>weather.h</b></li>
+    <li class="navelem"><a class="el" href="weather_8h.html">weather.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>
