@@ -16,6 +16,7 @@ public:
     Weather(QString unit, QString lang);
     void changeLanguage(QString lang);
     void changeUnit(QString unit);
+    QString getTempUnit();
 
     int getFromCity(QString city);
     int getFromGeo(double lat, double lon);
@@ -50,7 +51,7 @@ public:
             int id;
             QString main;
             QString description;
-            int icon;
+            QString icon;
         }weather;
 
         QString base;

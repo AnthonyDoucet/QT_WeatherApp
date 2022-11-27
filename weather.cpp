@@ -7,6 +7,17 @@ Weather::Weather(QString unit, QString lang): _unitSystem(unit), _language(lang)
 //https://openweathermap.org/current#data
 void Weather::changeLanguage(QString lang){ _language = lang; }
 void Weather::changeUnit(QString unit){ _unitSystem = unit; }
+QString Weather::getTempUnit(){
+    if(_unitSystem == "metric"){
+        return "°C";
+    }
+    else if(_unitSystem == "imperial"){
+        return "°F";
+    }
+    return "K";
+}
+
+
 
 int Weather::getFromCity(QString city){
     //city2geo(city);
@@ -54,7 +65,7 @@ int Weather::sendAndDecode(QUrl url){
     QJsonObject jweather = jroot["weather"].toArray().at(0).toObject();
         data.weather.id = jweather["id"].toInt();
         data.weather.description = jweather["description"].toString();
-        data.weather.icon = jweather["icon"].toInt();
+        data.weather.icon = jweather["icon"].toString();
 
     QJsonObject jmain = jroot["main"].toObject();
         data.temp = jmain["temp"].toDouble();
