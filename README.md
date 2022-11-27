@@ -9,7 +9,7 @@ Download the build in github releases
 <br><br>
 
 # Doxygen :
-### Online doc : https://anthonydoucet.github.io/QT_OpenWeather/Doc/index.html
+### Online doc : https://anthonydoucet.github.io/QT_WeatherApp/Doc/index.html
 <br><br>
 
 # Build it yourself
